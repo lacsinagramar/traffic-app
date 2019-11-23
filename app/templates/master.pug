@@ -7,29 +7,362 @@
 extends ./base
 
 block body
-    // I'm using Bulma's classes here.
-    // Refer to this: http://bulma.io/documentation/layout/container/
-    nav.navbar
-        div.navbar-brand
-            a.navbar-item(href="/") ExBPlate
-        
-        div.navbar-menu
-            div.navbar-start
-                div.navbar-item.has-dropdown.is-hoverable
-                    a.navbar-link(href="/admin") Admin
-                    div.navbar-dropdown.is-right
-                        a.navbar-item(href="/admin/users") Users
-
-            div.navbar-end
-                div.navbar-item.has-dropdown.is-hoverable
-                    a.navbar-link: span.icon: i.fa.fa-user
-                    div.navbar-dropdown.is-right
-                        a.navbar-item(href="/settings") Settings
-                        a.navbar-item(href="/logout") Log-out
-
-    div.container
-        //- This part right here is the dynamic content. Once you extend
-        //- this template, you can place anything here.
-        
-        // This comment marks the dynamic content
-        block content
+	.wrapper
+		.main-header
+			// Logo Header
+			.logo-header(data-background-color='blue')
+				a.logo(href='index.html')
+					img.navbar-brand(src='../assets/img/logo.svg', alt='navbar brand')
+				button.navbar-toggler.sidenav-toggler.ml-auto(type='button', data-toggle='collapse', data-target='collapse', aria-expanded='false', aria-label='Toggle navigation')
+					span.navbar-toggler-icon
+						i.icon-menu
+				button.topbar-toggler.more
+					i.icon-options-vertical
+				.nav-toggle
+					button.btn.btn-toggle.toggle-sidebar
+						i.icon-menu
+			// End Logo Header
+			// Navbar Header
+			nav.navbar.navbar-header.navbar-expand-lg(data-background-color='blue2')
+				.container-fluid
+					#search-nav.collapse
+						form.navbar-left.navbar-form.nav-search.mr-md-3
+							.input-group
+								.input-group-prepend
+									button.btn.btn-search.pr-1(type='submit')
+										i.fa.fa-search.search-icon
+								input.form-control(type='text', placeholder='Search ...')
+					ul.navbar-nav.topbar-nav.ml-md-auto.align-items-center
+						li.nav-item.toggle-nav-search.hidden-caret
+							a.nav-link(data-toggle='collapse', href='#search-nav', role='button', aria-expanded='false', aria-controls='search-nav')
+								i.fa.fa-search
+						li.nav-item.dropdown.hidden-caret
+							a#messageDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+								i.fa.fa-envelope
+							ul.dropdown-menu.messages-notif-box.animated.fadeIn(aria-labelledby='messageDropdown')
+								li
+									.dropdown-title.d-flex.justify-content-between.align-items-center
+										| Messages 
+										a.small(href='#') Mark all as read
+								li
+									.message-notif-scroll.scrollbar-outer
+										.notif-center
+											a(href='#')
+												.notif-img
+													img(src='../assets/img/jm_denis.jpg', alt='Img Profile')
+												.notif-content
+													span.subject Jimmy Denis
+													span.block How are you ?
+													span.time 5 minutes ago
+											a(href='#')
+												.notif-img
+													img(src='../assets/img/chadengle.jpg', alt='Img Profile')
+												.notif-content
+													span.subject Chad
+													span.block Ok, Thanks !
+													span.time 12 minutes ago
+											a(href='#')
+												.notif-img
+													img(src='../assets/img/mlane.jpg', alt='Img Profile')
+												.notif-content
+													span.subject Jhon Doe
+													span.block Ready for the meeting today...
+													span.time 12 minutes ago
+											a(href='#')
+												.notif-img
+													img(src='../assets/img/talha.jpg', alt='Img Profile')
+												.notif-content
+													span.subject Talha
+													span.block Hi, Apa Kabar ?
+													span.time 17 minutes ago
+								li
+									a.see-all(href='javascript:void(0);')
+										| See all messages
+										i.fa.fa-angle-right
+						li.nav-item.dropdown.hidden-caret
+							a#notifDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+								i.fa.fa-bell
+								span.notification 4
+							ul.dropdown-menu.notif-box.animated.fadeIn(aria-labelledby='notifDropdown')
+								li
+									.dropdown-title You have 4 new notification
+								li
+									.notif-scroll.scrollbar-outer
+										.notif-center
+											a(href='#')
+												.notif-icon.notif-primary
+													i.fa.fa-user-plus
+												.notif-content
+													span.block New user registered
+													span.time 5 minutes ago
+											a(href='#')
+												.notif-icon.notif-success
+													i.fa.fa-comment
+												.notif-content
+													span.block Rahmad commented on Admin
+													span.time 12 minutes ago
+											a(href='#')
+												.notif-img
+													img(src='../assets/img/profile2.jpg', alt='Img Profile')
+												.notif-content
+													span.block Reza send messages to you
+													span.time 12 minutes ago
+											a(href='#')
+												.notif-icon.notif-danger
+													i.fa.fa-heart
+												.notif-content
+													span.block Farrah liked Admin
+													span.time 17 minutes ago
+								li
+									a.see-all(href='javascript:void(0);')
+										| See all notifications
+										i.fa.fa-angle-right
+						li.nav-item.dropdown.hidden-caret
+							a.nav-link(data-toggle='dropdown', href='#', aria-expanded='false')
+								i.fas.fa-layer-group
+							.dropdown-menu.quick-actions.quick-actions-info.animated.fadeIn
+								.quick-actions-header
+									span.title.mb-1 Quick Actions
+									span.subtitle.op-8 Shortcuts
+								.quick-actions-scroll.scrollbar-outer
+									.quick-actions-items
+										.row.m-0
+											a.col-6.col-md-4.p-0(href='#')
+												.quick-actions-item
+													i.flaticon-file-1
+													span.text Generated Report
+											a.col-6.col-md-4.p-0(href='#')
+												.quick-actions-item
+													i.flaticon-database
+													span.text Create New Database
+											a.col-6.col-md-4.p-0(href='#')
+												.quick-actions-item
+													i.flaticon-pen
+													span.text Create New Post
+											a.col-6.col-md-4.p-0(href='#')
+												.quick-actions-item
+													i.flaticon-interface-1
+													span.text Create New Task
+											a.col-6.col-md-4.p-0(href='#')
+												.quick-actions-item
+													i.flaticon-list
+													span.text Completed Tasks
+											a.col-6.col-md-4.p-0(href='#')
+												.quick-actions-item
+													i.flaticon-file
+													span.text Create New Invoice
+						li.nav-item.dropdown.hidden-caret
+							a.dropdown-toggle.profile-pic(data-toggle='dropdown', href='#', aria-expanded='false')
+								.avatar-sm
+									img.avatar-img.rounded-circle(src='../assets/img/profile.jpg', alt='...')
+							ul.dropdown-menu.dropdown-user.animated.fadeIn
+								.dropdown-user-scroll.scrollbar-outer
+									li
+										.user-box
+											.avatar-lg
+												img.avatar-img.rounded(src='../assets/img/profile.jpg', alt='image profile')
+											.u-text
+												h4 Hizrian
+												p.text-muted hello@example.com
+												a.btn.btn-xs.btn-secondary.btn-sm(href='profile.html') View Profile
+									li
+										.dropdown-divider
+										a.dropdown-item(href='#') My Profile
+										a.dropdown-item(href='#') My Balance
+										a.dropdown-item(href='#') Inbox
+										.dropdown-divider
+										a.dropdown-item(href='#') Account Setting
+										.dropdown-divider
+										a.dropdown-item(href='#') Logout
+			// End Navbar
+			// Sidebar
+			.sidebar.sidebar-style-2
+				.sidebar-wrapper.scrollbar.scrollbar-inner
+					.sidebar-content
+						.user
+							.avatar-sm.float-left.mr-2
+								img.avatar-img.rounded-circle(src='../assets/img/profile.jpg', alt='...')
+							.info
+								a(data-toggle='collapse', href='#collapseExample', aria-expanded='true')
+									span
+										| Hizrian
+										span.user-level Administrator
+										span.caret
+								.clearfix
+								#collapseExample.collapse.in
+									ul.nav
+										li
+											a(href='#profile')
+												span.link-collapse My Profile
+										li
+											a(href='#edit')
+												span.link-collapse Edit Profile
+										li
+											a(href='#settings')
+												span.link-collapse Settings
+						ul.nav.nav-primary
+							li.nav-item.active
+								a.collapsed(data-toggle='collapse', href='#dashboard', aria-expanded='false')
+									i.fas.fa-home
+									p Dashboard
+									span.caret
+								#dashboard.collapse
+									ul.nav.nav-collapse
+										li
+											a(href='../demo1/index.html')
+												span.sub-item Dashboard 1
+										li
+											a(href='../demo2/index.html')
+												span.sub-item Dashboard 2
+							li.nav-section
+								span.sidebar-mini-icon
+									i.fa.fa-ellipsis-h
+								h4.text-section Components
+							li.nav-item
+								a(data-toggle='collapse', href='#base')
+									i.fas.fa-layer-group
+									p Base
+									span.caret
+								#base.collapse
+									ul.nav.nav-collapse
+										li
+											a(href='components/avatars.html')
+												span.sub-item Avatars
+										li
+											a(href='components/buttons.html')
+												span.sub-item Buttons
+										li
+											a(href='components/gridsystem.html')
+												span.sub-item Grid System
+										li
+											a(href='components/panels.html')
+												span.sub-item Panels
+										li
+											a(href='components/notifications.html')
+												span.sub-item Notifications
+										li
+											a(href='components/sweetalert.html')
+												span.sub-item Sweet Alert
+										li
+											a(href='components/font-awesome-icons.html')
+												span.sub-item Font Awesome Icons
+										li
+											a(href='components/simple-line-icons.html')
+												span.sub-item Simple Line Icons
+										li
+											a(href='components/flaticons.html')
+												span.sub-item Flaticons
+										li
+											a(href='components/typography.html')
+												span.sub-item Typography
+							li.nav-item
+								a(data-toggle='collapse', href='#sidebarLayouts')
+									i.fas.fa-th-list
+									p Sidebar Layouts
+									span.caret
+								#sidebarLayouts.collapse
+									ul.nav.nav-collapse
+										li
+											a(href='sidebar-style-1.html')
+												span.sub-item Sidebar Style 1
+										li
+											a(href='overlay-sidebar.html')
+												span.sub-item Overlay Sidebar
+										li
+											a(href='compact-sidebar.html')
+												span.sub-item Compact Sidebar
+										li
+											a(href='static-sidebar.html')
+												span.sub-item Static Sidebar
+										li
+											a(href='icon-menu.html')
+												span.sub-item Icon Menu
+							li.nav-item
+								a(data-toggle='collapse', href='#forms')
+									i.fas.fa-pen-square
+									p Forms
+									span.caret
+								#forms.collapse
+									ul.nav.nav-collapse
+										li
+											a(href='forms/forms.html')
+												span.sub-item Basic Form
+							li.nav-item
+								a(data-toggle='collapse', href='#tables')
+									i.fas.fa-table
+									p Tables
+									span.caret
+								#tables.collapse
+									ul.nav.nav-collapse
+										li
+											a(href='tables/tables.html')
+												span.sub-item Basic Table
+										li
+											a(href='tables/datatables.html')
+												span.sub-item Datatables
+							li.nav-item
+								a(data-toggle='collapse', href='#maps')
+									i.fas.fa-map-marker-alt
+									p Maps
+									span.caret
+								#maps.collapse
+									ul.nav.nav-collapse
+										li
+											a(href='maps/jqvmap.html')
+												span.sub-item JQVMap
+							li.nav-item
+								a(data-toggle='collapse', href='#charts')
+									i.far.fa-chart-bar
+									p Charts
+									span.caret
+								#charts.collapse
+									ul.nav.nav-collapse
+										li
+											a(href='charts/charts.html')
+												span.sub-item Chart Js
+										li
+											a(href='charts/sparkline.html')
+												span.sub-item Sparkline
+							li.nav-item
+								a(href='widgets.html')
+									i.fas.fa-desktop
+									p Widgets
+									span.badge.badge-success 4
+							li.nav-item
+								a(data-toggle='collapse', href='#submenu')
+									i.fas.fa-bars
+									p Menu Levels
+									span.caret
+								#submenu.collapse
+									ul.nav.nav-collapse
+										li
+											a(data-toggle='collapse', href='#subnav1')
+												span.sub-item Level 1
+												span.caret
+											#subnav1.collapse
+												ul.nav.nav-collapse.subnav
+													li
+														a(href='#')
+															span.sub-item Level 2
+													li
+														a(href='#')
+															span.sub-item Level 2
+										li
+											a(data-toggle='collapse', href='#subnav2')
+												span.sub-item Level 1
+												span.caret
+											#subnav2.collapse
+												ul.nav.nav-collapse.subnav
+													li
+														a(href='#')
+															span.sub-item Level 2
+										li
+											a(href='#')
+												span.sub-item Level 1
+							li.mx-4.mt-2
+								a.btn.btn-primary.btn-block(href='http://themekita.com/atlantis-bootstrap-dashboard.html')
+									span.btn-label.mr-2
+										i.fa.fa-heart
+									| Buy Pro
+			// End Sidebar
+			block content
